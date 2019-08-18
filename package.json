@@ -1,0 +1,30 @@
+{
+  "name": "purr-pg",
+  "version": "1.0.0",
+  "description": "command line util to format psql stuff",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rbhughes/purr-pg.git"
+  },
+  "keywords": [
+    "postgres",
+    "psql"
+  ],
+  "author": "rbhughes",
+  "license": "ISC",
+  "bin": {
+    "ppdm-meta": "./metadata.js",
+    "ppdm-list": "./tablelist.js"
+  },
+  "bugs": {
+    "url": "https://github.com/rbhughes/purr-pg/issues"
+  },
+  "homepage": "https://github.com/rbhughes/purr-pg#readme",
+  "dependencies": {
+    "commander": "^3.0.0"
+  }
+}
