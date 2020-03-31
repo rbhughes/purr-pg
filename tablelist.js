@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { spawn } = require('child_process')
+const {spawn} = require('child_process')
 const program = require('commander')
 const parser = require('./parser')
 
@@ -37,5 +37,5 @@ child.stderr.on('data', data => {
 child.stdout.on('data', data => {
   console.log(data.toString())
   console.log('-----------')
-  console.log(parser.punk('asdf'))
+  //console.log(parser.punk('asdf'))
 })

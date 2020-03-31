@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 
 let a = fs.readFileSync
 
@@ -39,7 +40,7 @@ const getColumns = (table, lines) => {
       if (capture) {
         const x = line.split('|')
         let nullable = x[3].trim() === 'not null' ? false : true
-        o[`${table}.${x[0].trim()}`] = { type: x[1].trim(), nullable: nullable }
+        o[`${table}.${x[0].trim()}`] = {type: x[1].trim(), nullable: nullable}
       }
     }
   }
@@ -69,7 +70,9 @@ const getIndexes = (table, lines) => {
           .split(',')
           .map(x => `${table}.${x.trim()}`)
 
-        o[`(${cols.join(',')})`] = { type: line.match(/([A-Z]+)/)[1].toLowerCase() }
+        o[`(${cols.join(',')})`] = {
+          type: line.match(/([A-Z]+)/)[1].toLowerCase()
+        }
       }
     }
   }
@@ -97,7 +100,10 @@ const getCheckConstraints = (table, lines) => {
     } else {
       if (capture) {
         let col = `${table}.${line.match(/\((\D+?)::/)[1]}`
-        o[col] = { type: line.match(/([A-Z]+)/)[1].toLowerCase(), rule: line.trim() }
+        o[col] = {
+          type: line.match(/([A-Z]+)/)[1].toLowerCase(),
+          rule: line.trim()
+        }
       }
     }
   }
@@ -188,11 +194,14 @@ const getReferencedBy = lines => {
 const collectPGMeta = base => {
   const o = {}
   fs.readdirSync(base).forEach(f => {
+    const fp = path.join(base, f)
+    //console.log(fp)
+
     try {
-      if (f.match(/r_well_status.txt$/)) {
-        //if (f.match(/well.txt$/)) {
+      //if (f.match(/r_well_status.txt$/)) {
+      if (fp.match(/ppdm_well.txt$/)) {
         let lines = fs
-          .readFileSync(f)
+          .readFileSync(fp)
           .toString()
           .split('\n')
 
